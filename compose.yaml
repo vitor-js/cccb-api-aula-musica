@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: node-js-app
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "${PORT:-3000}:${PORT:-3000}"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - NODE_ENV=development
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USERNAME=${DB_USERNAME:-postgres}
+      - DB_PASSWORD=${DB_PASSWORD:-postgres}
+      - DB_NAME=${DB_NAME:-meubanco}
+    command: npm run dev
+
+  db:
+    image: postgres:15
+    container_name: postgres-db-ccb
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USERNAME:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_DB: ${DB_NAME:-meubanco}
+    ports:
+      - "${DB_PORT:-5433}:5433"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME:-postgres} -d ${DB_NAME:-meubanco}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    command: postgres -c 'max_connections=1000'
+
+volumes:
+  postgres-data:
