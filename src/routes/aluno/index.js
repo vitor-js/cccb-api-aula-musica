@@ -2,10 +2,14 @@ import { Router } from "express"
 
 const router = Router();
 
+import  {getAllUsers} from '../../controller/userController/index.js'
 
-router.get("/aluno", (req, res) => {
-  return res.json({hello: "world"})
-});
+
+export {
+    getAllUsers
+}
+
+router.get("/aluno", getAllUsers);
 
 
 export default router
