@@ -1,6 +1,8 @@
 import database from "./database/index.js";
 import server from "./server/index.js";
 
+
+
 const bootstrap = async () => {
   try {
     console.log('Iniciando aplicação em modo: development');

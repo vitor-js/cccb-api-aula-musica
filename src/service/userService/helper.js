@@ -1,10 +1,17 @@
-import {Aluno} from "../../database/model/user/index.js"
+
+import { AppDataSource } from "../../database/config/data-source.js";
+import { Aluno } from "../../database/model/aluno/index.js";
+
 
 async function getAllUsers() {
     try {
-         const user = await Aluno.find(id)
-         console.log(user, 'label: chamada para o user')
-        return user
+    const alunoRepository = AppDataSource.getRepository(Aluno); // pega o repositório da entidade
+    const users = await alunoRepository.find({
+  relations: ["jornadas"], // ✅ carrega jornadas junto
+});
+    console.log(users, '-------')
+    return users;
+
     } catch(e) {
         return e
     } 
@@ -12,6 +19,42 @@ async function getAllUsers() {
 }
 
 
+async function getUser(id) {
+    try {
+      
+    } catch(e) {
+        return e
+    } 
+       
+}
+
+
+async function updateUser(id, params) {
+    try {
+      
+    } catch(e) {
+        return e
+    } 
+       
+}
+
+
+
+async function deleteUser(id) {
+    try {
+      
+    } catch(e) {
+        return e
+    } 
+       
+}
+
+
+
+
 export {
-    getAllUsers
+    getAllUsers,
+    getUser,
+    deleteUser,
+    updateUser
 }
