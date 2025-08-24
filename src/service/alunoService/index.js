@@ -18,7 +18,7 @@ async function createAluno(params) {
 async function getAllAlunos() {
     try {
         const alunos = await getAllAlunosHelper()
-        console.log(alunos, '---')
+        console.log(alunos)
         return alunos
     }catch(e) {
         throw("Erro interno de servidor")
