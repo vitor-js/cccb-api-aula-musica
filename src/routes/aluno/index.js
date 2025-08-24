@@ -2,20 +2,22 @@ import { Router } from "express"
 
 const router = Router();
 
-import  {getAllUsers, updateUser, getUser, deleteUser} from '../../controller/userController/index.js'
+import  {createAluno, getAllAlunos, updateAluno, getAluno, deleteAluno} from '../../controller/alunoController/index.js'
 
 
 export {
-    getAllUsers
+    getAllAlunos
 }
 
-router.get("/aluno", getAllUsers);
+router.post("/aluno", createAluno);
 
-router.get("/aluno/:id", getUser);
+router.get("/aluno", getAllAlunos);
 
-router.put("/aluno/:id", updateUser);
+router.get("/aluno/:id", getAluno);
 
-router.delete("/aluno/id", deleteUser);
+router.put("/aluno/:id", updateAluno);
+
+router.delete("/aluno/:id", deleteAluno);
 
 
 export default router
