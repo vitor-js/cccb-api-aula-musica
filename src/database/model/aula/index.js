@@ -6,6 +6,7 @@ export const Aula = new EntitySchema({
   columns: {
     id: { type: Number, primary: true, generated: true },
     modulo: { type: String, nullable: false },
+    numero: { type: String, nullable: false },
     data: { type: "date", nullable: false },
     instrutor: { type: String, nullable: false },
     created_at: { type: "timestamp", createDate: true },
