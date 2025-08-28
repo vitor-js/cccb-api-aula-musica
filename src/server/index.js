@@ -18,7 +18,8 @@ async function start(port) {
     server = app.listen(port, () => {
       console.log(`Servidor Express escutando em http://localhost:${port}`);
     });
-
+    
+    return server
   }catch {
     console.error("Falha ao iniciar o servidor:", error);
     throw error; // Propaga o erro para o chamador
