@@ -8,7 +8,7 @@ import {deleteAluno as deleteAlunoService} from '../../service/alunoService/inde
 async function createAluno(req, res) {
     try {
         const newAluno = await createAlunoServie(req.body)
-        return res.json({
+        return res.status(201).json({
             data: newAluno
         })
     }catch(e){

@@ -9,7 +9,7 @@ async function createJornadaByAluno(req, res) {
     try {
         const alunoId = Number(req.params.id)
         const jornada = await createJornadaServie(alunoId, req.body)
-        return res.json({
+        return res.status(201).json({
             data: jornada
         })
     }catch(e){
