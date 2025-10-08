@@ -1,8 +1,16 @@
+import dotenv from "dotenv";
+
+const envFile = process.env.NODE_ENV === "test" ? ".env.test" : ".env";
+dotenv.config({ path: envFile });
+
+import database from "./database/index.js";
 import server from "./server/index.js";
 
 const bootstrap = async () => {
   try {
-    console.log('Iniciando aplicação em modo: development');
+    console.log(`Iniciando aplicação em modo: ${process.env.NODE_ENV || 'development'}`);
+
+    await database.startDatabase();
 
     // Depois inicia o servidor
     await server.startServer(3000);
@@ -13,6 +21,7 @@ const bootstrap = async () => {
     
     // Em caso de erro, tenta encerrar tudo corretamente
     try {
+      await database.stopDatabase()
       await server.stopServer();
     } catch (shutdownError) {
       console.error('Erro ao encerrar a aplicação:', shutdownError);

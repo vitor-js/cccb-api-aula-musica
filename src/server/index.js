@@ -1,6 +1,8 @@
 import express from "express";
 import cors from 'cors';
 import alunoRoutes from '../routes/aluno/index.js'
+import jornadaRoutes from '../routes/jornada/index.js'
+import aulaRoutes from '../routes/aula/index.js'
 
 let app
 let server
@@ -12,11 +14,12 @@ async function start(port) {
 
     app.use(cors());
     app.use(express.json());
-    app.use(alunoRoutes)
+    app.use(alunoRoutes, jornadaRoutes, aulaRoutes)
     server = app.listen(port, () => {
       console.log(`Servidor Express escutando em http://localhost:${port}`);
     });
-
+    
+    return server
   }catch {
     console.error("Falha ao iniciar o servidor:", error);
     throw error; // Propaga o erro para o chamador
@@ -40,7 +43,6 @@ async function stop() {
       }
     })
   })
-
 }
 
 
